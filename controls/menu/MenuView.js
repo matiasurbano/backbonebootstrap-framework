@@ -1,0 +1,102 @@
+/*globals define, app, window*/
+
+define( [
+    'jquery', 'lodash',
+    'src/views/BaseView',
+    'text!./menu-container.html',
+    'text!./menu-user.html',
+    'text!./menu-parent.html',
+    'text!./menu-child.html'
+  ], function(
+    $, _,
+    BaseView,
+    templateContainer,
+    templateUser,
+    templateParent,
+    templateChild
+  ) {
+
+'use strict';
+
+var MenuView = BaseView.extend({
+
+  initialize: function(options) {
+    options = options || {};
+
+    _.extend(this, options);
+
+    BaseView.prototype.initialize.call(this, options);
+
+    this.tagName = 'div';
+
+    if (!this.el) throw new Error('View.el not specified!');
+    this.$el = $(this.el);
+
+    if (!this.collection) throw new Error('collection not specified!');
+
+    this.templateContainer = this.compileTemplate(this.templateContainer || templateContainer);
+
+    this.templateUser = this.compileTemplate(this.templateUser || templateUser);
+
+    this.templateParent = this.compileTemplate(this.templateParent || templateParent);
+
+    this.templateChild = this.compileTemplate(this.templateChild || templateChild);
+
+    this.collection.bind('reset', this.render, this);
+  },
+
+  render: function() {
+
+    var htmlMenu      = this.htmlMenu(this.collection.asMenu()),
+        htmlRightMenu = this.templateUser({ name: app.user.userId});
+
+    var html = this.templateContainer({
+      menu      : htmlMenu,
+      rightMenu : htmlRightMenu
+    });
+
+    this.$el.html(html);
+
+    return this;
+  },
+
+  htmlMenu: function(menu) {
+    var html = '';
+
+    if (!menu) return '';
+
+    if (menu.hasChildren()) {
+      var htmlChildren = '';
+      _.each(menu.children, function(child) {
+        htmlChildren = htmlChildren + this.htmlMenu(child);
+      }, this);
+      html = this.templateParent({ menu: menu, children: htmlChildren });
+    } else {
+      html = this.templateChild({ menu: menu, rootUrl: app.rootUrl });
+    }
+
+    return html;
+  },
+
+  clear: function() {
+    this.$el.html('');
+  },
+
+  events: {
+    'click .change-user': 'changeUser'
+  },
+
+  changeUser: function(e) {
+    e.preventDefault();
+    var selectedUser = $(e.currentTarget).text().split(' ')[0];
+    // user.setCurrentUser(selectedUser);
+    app.user.setUserId(selectedUser);
+    // window.location = app.rootUrl;
+    window.location.reload(true);
+    return false;
+  }
+
+});
+
+  return MenuView;
+});

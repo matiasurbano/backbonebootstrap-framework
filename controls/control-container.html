@@ -1,0 +1,10 @@
+<div class="<%= spanClass %>">
+  <label class="control-label" for="<%= field.fullName %>"><%= label %></label>
+<% if (field.help) { %>
+  <i class="icon-question-sign" rel="popover" data-content="<%= field.help %>"
+    data-original-title="Ayuda">
+  </i>
+<% } %>
+  %control%
+  <ul class="errors-container"></ul>
+</div>
