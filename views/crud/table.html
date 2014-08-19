@@ -1,0 +1,155 @@
+  <div id="advanceTable" class="widget">
+    <div class="whead">
+      <h6><%= _title %></h6>
+      <div class="clear"></div>
+    </div>
+    <div class="hiddenpars" id="dyn">
+      <a class="tOptions act showQuery" title="Options"><img alt="" src="img/options.png"></a>
+      <div class="dataTables_wrapper" id="dynamic_wrapper" role="grid">
+
+        <div class="tablePars advance" style="display:none">
+          <!-- Search fields -->
+        </div>
+
+        <div class="tablePars">
+
+          <div id="page-len-view" class="page-len-view">
+            <!-- Pagelen View -->
+          </div>
+
+          <div id="filter-view" class="filter-view">
+            <!-- Filter View -->
+          </div>
+
+        </div>
+        <div id="headers-view">
+          <table cellpadding="0" cellspacing="0" width="100%" class="tDefault table table-striped table-bordered" >
+            <thead>
+              <tr>
+                <th order="id">N.<i class="icon-order"></i></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        <div class="tableFooter" id="pages-view"></div>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+  </div>
+
+  
+ <!-- Acciones adiscionales -->
+        <div class="row">
+          <div class="span12 btns">
+            <div class="btn-toolbar">
+
+              <div class="btn-group customActions" >
+                <button class="btn dropdown-toggle" data-toggle="dropdown">Exportar <span class="caret"></span></button>
+                <ul class="dropdown-menu" style="min-width: 100px;">
+                  
+                  <li>
+                    <a class="Exportar_Listado_a_Excel">
+                      
+                        <i class="icon-file"></i>
+                      
+                     Excel
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a class="Exportar_Listado_a_CSV">
+                      
+                        <i class="icon-file"></i>
+                      
+                      CSV
+                    </a>
+                  </li>
+                  
+   <!--                <li>
+                    <a class="Exportar_Listado_a_PDF">
+                      
+                        <i class="icon-file"></i>
+                      
+                      PDF
+                    </a>
+                  </li>
+                   -->
+              </ul>
+              <script type="text/javascript">
+                  (function(){
+                      var config = require('app/config');
+
+                      $('a.Exportar_Listado_a_Excel').on('click',function(i,e){
+                        
+                       var query = _.extend(app.controller.queryView.modelToQuery(),app.controller.formView.model),
+                        dataCollection = _.extend({},app.controller.collection),
+                        url = config.endpoint + 'TopeDocumento/Exportacion';
+
+                        window.open(getUrl(query,dataCollection,url,"EXCEL"), "Informe", "location=1,status=1,scrollbars=1,width=500,height=500");
+
+                      });
+
+                      $('a.Exportar_Listado_a_CSV').on('click',function(i,e){
+
+                       var query = _.extend(app.controller.queryView.modelToQuery(),app.controller.formView.model),
+                        dataCollection = _.extend({},app.controller.collection),
+                        url = config.endpoint + 'TopeDocumento/Exportacion';
+
+                        window.open(getUrl(query,dataCollection,url,"CSV"), "Informe", "location=1,status=1,scrollbars=1,width=500,height=500");
+
+                      });
+
+                      $('a.Exportar_Listado_a_PDF').on('click',function(i,e){
+
+                       var query = _.extend(app.controller.queryView.modelToQuery(),app.controller.formView.model),
+                        dataCollection = _.extend({},app.controller.collection),
+                        url = config.endpoint + 'TopeDocumento/Exportacion';
+
+                        window.open(getUrl(query,dataCollection,url,"PDF"), "Informe", "location=1,status=1,scrollbars=1,width=500,height=500");
+
+                      });
+
+
+                      var getUrl = function(query,collection,url,type){
+
+                          var filterParams = _.filter(_.pairs(collection.getParams()),function(elem){
+                              if(elem[1]){ return true; };
+                          });
+                          
+                          if(filterParams){
+                              url += '?';
+                              url += _.map(filterParams,function(e){ return e.join('=')}).join('&');      
+                          }
+                          url += '&etype=' + type;
+
+                          return url;
+                      } 
+
+
+                  })();  
+              </script>
+              </div>
+            
+            </div>
+          </div>
+
+        </div>
+        <!-- FIN Acciones adiscionales -->
+
+
+  <div class="row">
+    <div class="span6 btns">
+      <% if (!_addBtnHidden) { %>
+      <button class="btn create">
+         <i class="icon-plus icon-black"></i>Agregar
+      </button>
+      <% } %>
+
+    </div>
+  </div>
+
+
+

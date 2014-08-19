@@ -1,0 +1,37 @@
+  <div class="navbar-inner-info">
+    <div class="row">
+      <div class="utils">
+        <a href="#" rel="tooltip" title="vista daltónicos"
+          onclick="app.accessibility.colorBlind()"><i class="icon-eye-open"></i></a> / <a
+          href="#" rel="tooltip" title="disminuir fuente" class="sizeminus"
+          onclick="app.accessibility.resizeText(-1)">A-</a> / <a href="#" rel="tooltip"
+          title="aumentar fuente" class="sizeplus" onclick="app.accessibility.resizeText(1)">A+</a>
+        / <a href="#" rel="tooltip" title="valores por defecto"
+          onclick="window.location.reload();"><i class="icon-refresh"></i></a>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="loading" >
+          <img src="img/spinner.gif"  alt="Cargando...">
+          <span>Cargando...</span>
+      </div>
+
+      <div id="loadingModal" class="modal hide fade in" tabindex="-1" role="dialog"
+          aria-hidden="false" data-keyboard="false" data-backdrop="static">
+            <div style="z-index:2000;">
+              <div class="modal-header">
+                <h3 id="myModalLabel">Información</h3>
+              </div>
+              <div class="modal-body" style="text-align:center;">
+                <img src="img/spinner.gif"  alt="Cargando...">
+                <h4>Obteniendo resultados...</h4>
+                
+              </div>
+              <div class="modal-footer">
+                
+              </div>
+            </div>
+        </div>
+   </div>   
+  </div>

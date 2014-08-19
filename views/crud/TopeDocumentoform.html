@@ -1,0 +1,56 @@
+
+<div class="widget">
+
+  <div class="whead">
+    <h6><%= _title %></h6>
+    <div class="clear"></div>
+  </div>
+
+  <div class="panel-content">
+    %controls%
+  </div>
+
+</div>
+
+<div class="row topesView">
+
+</div>
+
+<div class="row">
+
+  <div class="span6 btns">
+      <% if (!_addBtnHidden) { %>
+        <button class="btn btn-primary save">Guardar</button>
+      <% } %>
+    <button class="btn cancel">Cancelar</button>
+  </div>
+
+  <div class="span6 btns">
+    <div class="btn-toolbar" >
+
+      <% if (!_addBtnHidden) { %>
+        <button class="btn btn-danger delete">Borrar</button>
+      <% } %>
+
+      <% if (customActions.length > 0) { %>
+
+      <div class="btn-group customActions">
+        <button class="btn dropdown-toggle" data-toggle="dropdown">Otras acciones<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <% _.each(customActions, function(action) { %>
+          <li>
+            <a class=<%= action.id %>>
+              <% if (action.icon) { %>
+                <i class="icon-<%= action.icon %>"></i>
+              <% } %>
+              <%= action.label %>
+            </a>
+          </li>
+          <% }); %>
+      </div>
+      <% } %>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,14 @@
+
+  <div class="accordion-group">
+    <div class="whead accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" href="#<%= groupId %>">
+        <%= title %>
+        <i class="downUpbtn icon-chevron-<%= collapsed ? 'down' : 'up' %>"></i>
+      </a>
+    </div>
+    <div id="<%= groupId %>" class="accordion-body collapse <%= collapsed ? '' : 'in' %>">
+      <div class="accordion-inner">
+        <%= content %>
+      </div>
+    </div>
+  </div>
