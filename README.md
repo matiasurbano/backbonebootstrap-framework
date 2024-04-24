@@ -1,4 +1,8 @@
-BackboneBootstrap Core
+
+
+![BackboneBootstrap Framework](https://avatars.githubusercontent.com/u/8440052?s=250&v=4 "BackboneBootstrap Framework")
+
+BackboneBootstrap Framework - Core
 ======================
 
 Basic Backbone application using Twitter Bootstrap to use as a skeleton for new
